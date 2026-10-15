@@ -67,7 +67,7 @@
       z-index: 1;
       background: radial-gradient(
         700px circle at var(--cursor-x) var(--cursor-y),
-        rgba(139, 92, 246, 0.13),
+        rgba(139, 92, 246, 0.14),
         rgba(6, 182, 212, 0.05) 40%,
         transparent 80%
       );
@@ -103,10 +103,6 @@
 
     .tilt-card:hover::before {
       opacity: 1;
-    }
-
-    .tilt-inner-pop {
-      transform: translateZ(38px);
     }
 
     /* Holographic Laser Scan Animation on Screenshots */
@@ -341,48 +337,10 @@
               <div class="relative rounded-[2.1rem] overflow-hidden bg-[#0a0d1a] aspect-[9/19.5]">
                 <img 
                   id="hero-phone-img"
-                  src="1000052614.jpg" 
+                  src="app_screenshot.jpg" 
                   alt="Lakshya App Main Dashboard - Hello Abhishek Kumar Yadav" 
                   class="w-full h-full object-cover object-top"
-                  onerror="this.style.display='none'; document.getElementById('hero-fallback-ui').style.display='flex';"
                 />
-                <!-- Fallback Interactive UI if image isn't in same directory yet -->
-                <div id="hero-fallback-ui" style="display:none;" class="w-full h-full flex-col justify-between p-4 bg-[#080b18] text-left select-none">
-                  <div class="space-y-2.5">
-                    <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white/[0.04] border border-purple-500/30">
-                      <div>
-                        <div class="text-xs font-bold text-white">Hello, Abhishek Kumar Yadav 👨‍⚕️👋</div>
-                        <div class="text-[10px] text-cyan-400">Dropper Aspirant 🎯</div>
-                      </div>
-                      <div class="w-7 h-7 rounded-full bg-purple-500/20 flex items-center justify-center text-xs">⚙️</div>
-                    </div>
-                    <div class="p-3 rounded-2xl bg-gradient-to-r from-purple-900/50 to-indigo-900/40 border border-purple-500/40 flex items-center justify-between">
-                      <div>
-                        <div class="text-xs font-bold text-white">🧠 Spaced Repetition Engine</div>
-                        <div class="text-[10px] text-slate-300">Complete Dashboard & NCERT</div>
-                      </div>
-                      <span class="px-2.5 py-1 rounded-lg bg-purple-500/30 text-[10px] text-purple-200 border border-purple-400/40">Open Hub &gt;</span>
-                    </div>
-                    <div class="p-3 rounded-2xl bg-[#0e1424] border border-slate-700/60">
-                      <div class="text-[9px] font-mono text-amber-300 uppercase">✨ LAKSHYA AI DAILY INSPIRATION</div>
-                      <div class="text-xs italic text-white mt-1">"Small daily improvements over time lead to stunning results."</div>
-                      <div class="text-[10px] text-right text-slate-400 mt-1">— Robin Sharma</div>
-                    </div>
-                    <div class="p-3 rounded-2xl bg-gradient-to-r from-rose-950/60 to-purple-950/50 border border-rose-500/40">
-                      <div class="text-xs font-bold text-white">🛡️ LAKSHYA AI Guardian</div>
-                      <div class="text-[10px] text-rose-200">Readiness: 40% (Needs Sprint Push 🚨)</div>
-                    </div>
-                    <div class="p-3 rounded-2xl bg-gradient-to-r from-emerald-950/70 to-teal-950/50 border border-emerald-500/40">
-                      <div class="text-xs font-bold text-white">🏛️ GMC College Cutoffs <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">AIQ & STATE</span></div>
-                      <div class="text-[10px] text-emerald-200">AIIMS, MAMC, KGMU, Seth GS & Top GMC</div>
-                    </div>
-                    <div class="p-3 rounded-2xl bg-gradient-to-r from-indigo-950/70 to-purple-950/50 border border-indigo-500/40">
-                      <div class="text-xs font-bold text-white">🤖 AI CBT Test Engine <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">1988-2026 PYQ</span></div>
-                      <div class="text-[10px] text-indigo-200">NEET & JEE Chapter Tests & PDF Scanner</div>
-                    </div>
-                  </div>
-                  <div class="text-center text-[10px] font-mono text-cyan-300 pt-2">Place 1000052614.jpg in repo root</div>
-                </div>
               </div>
             </div>
 
@@ -410,9 +368,7 @@
 
       <div class="grid lg:grid-cols-12 gap-8 items-center">
         <!-- Left Screen Selector Buttons -->
-        <div class="lg:col-span-4 space-y-2.5" id="simulator-tabs">
-          <!-- Populated dynamically via JS for all 8 screenshots -->
-        </div>
+        <div class="lg:col-span-4 space-y-2.5" id="simulator-tabs"></div>
 
         <!-- Center Interactive 3D Phone Display -->
         <div class="lg:col-span-4 flex justify-center perspective-stage">
@@ -420,7 +376,7 @@
             <div class="holo-screen-container rounded-[2rem] overflow-hidden aspect-[9/19.5] bg-[#050711] relative">
               <img 
                 id="active-sim-image" 
-                src="1000052614.jpg" 
+                src="app_screenshot.jpg" 
                 alt="Interactive App Screen" 
                 class="w-full h-full object-cover object-top transition-all duration-300"
               />
@@ -472,13 +428,11 @@
           Har Ek Screen Mein Hai <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Glowing Cyberpunk Precision</span>
         </h2>
         <p class="text-slate-400 text-sm sm:text-base">
-          Apना mouse kisi bhi card ke upar ghumao—har screenshot 3D tilt, laser scanline, aur detailed feature breakdown ke saath zinda ho uthega.
+          Apna mouse ya finger kisi bhi card par le jao—har screenshot 3D tilt, laser scanline, aur detailed feature breakdown ke saath chamkega.
         </p>
       </div>
 
-      <div id="bento-screens-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-7 perspective-stage">
-        <!-- Populated by JS with all 8 images and rich descriptions -->
-      </div>
+      <div id="bento-screens-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-7 perspective-stage"></div>
     </div>
   </section>
 
@@ -502,7 +456,7 @@
               <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0 text-purple-300 font-mono font-bold">01</div>
               <div>
                 <h4 class="font-display font-bold text-white text-base">150ms FastOutSlowIn Transitions & Floating Glass Sidebar</h4>
-                <p class="text-xs text-slate-400 mt-1">MainActivity.kt mein har screen transition 150ms par tuned hai aur collapsible FloatingGlassSidebar bina kisi frame-drop ke खुलता hai.</p>
+                <p class="text-xs text-slate-400 mt-1">MainActivity.kt mein har screen transition 150ms par tuned hai aur collapsible FloatingGlassSidebar bina kisi frame-drop ke khulta hai.</p>
               </div>
             </div>
 
@@ -631,9 +585,7 @@
               oninput="updateGmcPredictor(this.value)"
             />
           </div>
-          <div id="gmc-results" class="space-y-2.5 pt-2">
-            <!-- Populated via JS -->
-          </div>
+          <div id="gmc-results" class="space-y-2.5 pt-2"></div>
         </div>
 
       </div>
@@ -654,11 +606,11 @@
           Crafted with passion by <strong class="text-white">Abhishek Kumar Yadav</strong>. Zero ads clutter, 100% distraction-free study timer, 5 home-screen widgets, aur India ka sabse khatarnak AI CBT Test Engine.
         </p>
         <div class="flex flex-wrap justify-center gap-4 pt-4">
-          <a href="https://github.com/abhishek6298/lakshyaa1/releases" target="_blank" class="glow-cta inline-flex items-center gap-3 px-9 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-display font-bold text-base hover:scale-105 transition-transform">
+          <a href="https://github.com/Abhishek6298/lakshyaa1/releases" target="_blank" class="glow-cta inline-flex items-center gap-3 px-9 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white font-display font-bold text-base hover:scale-105 transition-transform">
             <i data-lucide="smartphone" class="w-5 h-5"></i>
             <span>Download Lakshya AI Android App</span>
           </a>
-          <a href="https://github.com/abhishek6298/lakshyaa1" target="_blank" class="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white font-display font-semibold text-base transition-all">
+          <a href="https://github.com/Abhishek6298/lakshyaa1" target="_blank" class="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white font-display font-semibold text-base transition-all">
             <i data-lucide="github" class="w-5 h-5"></i>
             <span>View on GitHub</span>
           </a>
@@ -671,11 +623,10 @@
     </div>
   </section>
 
-  <!-- ================= JAVASCRIPT : 8 SCREENSHOTS DATA, 3D TILT & NEURAL CANVAS ================= -->
+  <!-- ================= JAVASCRIPT : AUTO-DETECT GITHUB SCREENSHOTS + 3D TILT ================= -->
   <script>
     lucide.createIcons();
 
-    // 1. All 8 Screenshots Metadata from User's Uploaded Images
     const screensData = [
       {
         id: 1,
@@ -751,11 +702,12 @@
       }
     ];
 
-    // 2. Render Simulator Tabs & Bento Grid
     const tabsContainer = document.getElementById('simulator-tabs');
     const bentoGrid = document.getElementById('bento-screens-grid');
+    let currentSelectedIndex = 0;
 
     function selectSimScreen(index) {
+      currentSelectedIndex = index;
       const item = screensData[index];
       document.getElementById('active-sim-image').src = item.file;
       document.getElementById('sim-badge').textContent = `SCREEN 0${item.id} / 08 • ${item.tag.toUpperCase()}`;
@@ -780,52 +732,86 @@
       });
     }
 
-    screensData.forEach((screen, idx) => {
-      // Simulator Tab Button
-      const btn = document.createElement('button');
-      btn.onclick = () => selectSimScreen(idx);
-      btn.innerHTML = `
-        <div class="flex items-center gap-3">
-          <span class="w-7 h-7 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-xs font-mono font-bold text-purple-300">0${screen.id}</span>
+    function renderAllScreens() {
+      tabsContainer.innerHTML = '';
+      bentoGrid.innerHTML = '';
+
+      screensData.forEach((screen, idx) => {
+        const btn = document.createElement('button');
+        btn.onclick = () => selectSimScreen(idx);
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-xs font-mono font-bold text-purple-300">0${screen.id}</span>
+            <div>
+              <div class="font-display font-bold text-sm text-white">${screen.title}</div>
+              <div class="text-[11px] text-slate-400 font-mono">${screen.tag}</div>
+            </div>
+          </div>
+          <span class="text-cyan-400 text-xs font-mono">&rarr;</span>
+        `;
+        tabsContainer.appendChild(btn);
+
+        const card = document.createElement('div');
+        card.className = "tilt-card group rounded-3xl bg-[#090d1d]/90 border border-white/10 p-4 flex flex-col justify-between hover:border-purple-400/60";
+        card.innerHTML = `
           <div>
-            <div class="font-display font-bold text-sm text-white">${screen.title}</div>
-            <div class="text-[11px] text-slate-400 font-mono">${screen.tag}</div>
+            <div class="flex items-center justify-between mb-3 px-1">
+              <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                0${screen.id} &bull; ${screen.tag}
+              </span>
+              <button onclick="document.getElementById('interactive-preview').scrollIntoView({behavior:'smooth'}); selectSimScreen(${idx});" class="text-[11px] font-mono text-cyan-400 hover:underline">
+                Inspect 3D &nearr;
+              </button>
+            </div>
+            <div class="holo-screen-container aspect-[9/19] rounded-2xl overflow-hidden border border-white/10 mb-4 bg-[#050711]">
+              <img src="${screen.file}" onerror="this.src='app_screenshot.jpg'" alt="${screen.title}" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
+            <h3 class="font-display font-bold text-lg text-white px-1">${screen.title}</h3>
+            <p class="text-xs text-slate-400 mt-1.5 px-1 leading-relaxed">${screen.desc}</p>
           </div>
-        </div>
-        <span class="text-cyan-400 text-xs font-mono">&rarr;</span>
-      `;
-      tabsContainer.appendChild(btn);
-
-      // Bento Card for 8-Screen Gallery
-      const card = document.createElement('div');
-      card.className = "tilt-card group rounded-3xl bg-[#090d1d]/90 border border-white/10 p-4 flex flex-col justify-between hover:border-purple-400/60";
-      card.innerHTML = `
-        <div>
-          <div class="flex items-center justify-between mb-3 px-1">
-            <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-              0${screen.id} &bull; ${screen.tag}
-            </span>
-            <button onclick="document.getElementById('interactive-preview').scrollIntoView({behavior:'smooth'}); selectSimScreen(${idx});" class="text-[11px] font-mono text-cyan-400 hover:underline">
-              Inspect 3D &nearr;
-            </button>
+          <div class="mt-4 pt-3 border-t border-white/10 px-1 flex flex-wrap gap-1.5">
+            ${screen.highlights.map(h => `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-cyan-300 border border-white/10">${h}</span>`).join('')}
           </div>
-          <div class="holo-screen-container aspect-[9/19] rounded-2xl overflow-hidden border border-white/10 mb-4 bg-[#050711]">
-            <img src="${screen.file}" alt="${screen.title}" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" />
-          </div>
-          <h3 class="font-display font-bold text-lg text-white px-1">${screen.title}</h3>
-          <p class="text-xs text-slate-400 mt-1.5 px-1 leading-relaxed">${screen.desc}</p>
-        </div>
-        <div class="mt-4 pt-3 border-t border-white/10 px-1 flex flex-wrap gap-1.5">
-          ${screen.highlights.map(h => `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-cyan-300 border border-white/10">${h}</span>`).join('')}
-        </div>
-      `;
-      bentoGrid.appendChild(card);
-    });
+        `;
+        bentoGrid.appendChild(card);
+      });
 
-    // Initialize first screen
-    selectSimScreen(0);
+      selectSimScreen(currentSelectedIndex);
+      attach3DTilt();
+    }
 
-    // 3. Interactive GMC College Cutoff Predictor (Data from GmcDelhi.kt, GmcBihar.kt, GmcAndhraPradesh.kt)
+    // SMART GITHUB AUTO-DISCOVERY: Automatically binds your uploaded Screenshot_20261015_... files!
+    async function autoDiscoverRepoScreenshots() {
+      try {
+        const res = await fetch('https://api.github.com/repos/Abhishek6298/lakshyaa1/contents/');
+        if (!res.ok) return;
+        const files = await res.json();
+
+        const uploadedScreenshots = files
+          .filter(f => f.type === 'file' && /^Screenshot_.*\.(jpg|jpeg|png|webp)$/i.test(f.name))
+          .map(f => f.name)
+          .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+        if (uploadedScreenshots.length > 0) {
+          screensData.forEach((item, index) => {
+            if (uploadedScreenshots[index]) {
+              item.file = encodeURIComponent(uploadedScreenshots[index]);
+            } else {
+              item.file = encodeURIComponent(uploadedScreenshots[0]);
+            }
+          });
+          document.getElementById('hero-phone-img').src = screensData[0].file;
+          renderAllScreens();
+        }
+      } catch (e) {
+        console.log('Using default image paths', e);
+      }
+    }
+
+    renderAllScreens();
+    autoDiscoverRepoScreenshots();
+
+    // GMC College Cutoff Predictor
     const gmcColleges = [
       { name: "AIIMS New Delhi", city: "New Delhi", cutoff: 715, fee: "₹1,628 / yr", beds: "2,500+ Beds" },
       { name: "MAMC New Delhi", city: "New Delhi", cutoff: 705, fee: "₹3,310 / yr", beds: "2,800+ Beds" },
@@ -860,7 +846,6 @@
     }
     updateGmcPredictor(695);
 
-    // 4. Interactive Quiz Handler
     function checkQuiz(btn, isCorrect) {
       const buttons = document.querySelectorAll('#demo-quiz-options button');
       buttons.forEach(b => b.classList.remove('border-emerald-400', 'bg-emerald-500/20', 'border-rose-400', 'bg-rose-500/20'));
@@ -872,7 +857,6 @@
       }
     }
 
-    // 5. Universal 3D Mouse Tilt Effect + Cursor Spotlight
     document.addEventListener('mousemove', (e) => {
       document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
       document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
@@ -880,7 +864,7 @@
 
     function attach3DTilt() {
       document.querySelectorAll('.tilt-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
+        card.onmousemove = (e) => {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
@@ -889,15 +873,14 @@
           const rotateX = ((y - centerY) / centerY) * -7;
           const rotateY = ((x - centerX) / centerX) * 7;
           card.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
-        });
-        card.addEventListener('mouseleave', () => {
+        };
+        card.onmouseleave = () => {
           card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        });
+        };
       });
     }
     attach3DTilt();
 
-    // 6. 60FPS Neural Constellation Canvas Background
     const canvas = document.getElementById('neural-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
