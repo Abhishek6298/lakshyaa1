@@ -91,7 +91,7 @@
         .hero {
             width: 100%;
             max-width: 900px;
-            margin: 50px auto 80px;
+            margin: 40px auto 80px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -140,56 +140,43 @@
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             width: 100%;
         }
 
-        /* App Preview Mockup */
+        /* Glowing Animated Border App Mockup */
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 25px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.2);
+                border-color: rgba(56, 189, 248, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(168, 85, 247, 0.8), inset 0 0 30px rgba(168, 85, 247, 0.4);
+                border-color: rgba(168, 85, 247, 1);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.2);
+                border-color: rgba(56, 189, 248, 0.8);
+            }
+        }
+
         .app-mockup {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-        }
-
-        .mockup-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
-
-        .mockup-screen {
             background: #0b0f19;
-            border-radius: 16px;
-            padding: 40px 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(56, 189, 248, 0.8);
+            border-radius: 28px;
+            padding: 15px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            animation: borderGlow 3s infinite ease-in-out;
+            margin: 0 auto;
         }
 
-        .mockup-screen h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .mockup-screen p {
-            color: #94a3b8;
-            font-size: 1rem;
+        .app-screenshot {
+            width: 100%;
+            border-radius: 18px;
+            display: block;
+            object-fit: contain;
         }
 
         /* Features Section */
@@ -290,16 +277,9 @@
                 <span class="badge">🩺 Target AIIMS Delhi • Master Your NEET Journey</span>
             </div>
 
+            <!-- Glowing Animated App Screenshot Preview -->
             <div class="app-mockup">
-                <div class="mockup-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                </div>
-                <div class="mockup-screen">
-                    <h3>Welcome to Lakshya App</h3>
-                    <p>Streamlined Task Management • Smart Study Logs • AI-Powered Guidance</p>
-                </div>
+                <img src="app_screenshot.jpg" alt="Lakshya App UI" class="app-screenshot">
             </div>
         </section>
 
@@ -340,7 +320,7 @@
 
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    ### Lightning Fast UI
+                    <h3>Lightning Fast UI</h3>
                     <p>Designed for zero distractions. Clean, modern Material-inspired interface built for dedicated aspirants.</p>
                 </div>
             </div>
