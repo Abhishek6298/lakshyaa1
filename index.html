@@ -14,34 +14,50 @@
             scroll-behavior: smooth;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            min-height: 100vh;
             background: #060913;
             color: #f1f5f9;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Background Aurora Effect */
         .aurora {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 1000px;
+            width: 100vw;
+            max-width: 1200px;
             height: 500px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(147, 51, 234, 0.15));
-            filter: blur(120px);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(147, 51, 234, 0.12));
+            filter: blur(140px);
             z-index: -1;
             border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Wrapper to keep everything centered and full width */
+        .page-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
         }
 
         /* Navbar */
         nav {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 25px 20px;
+            padding: 25px 0;
         }
 
         .logo {
@@ -73,10 +89,13 @@
 
         /* Hero Section */
         .hero {
-            max-width: 1000px;
-            margin: 60px auto 100px;
-            padding: 0 20px;
+            width: 100%;
+            max-width: 900px;
+            margin: 50px auto 80px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .badge {
@@ -93,7 +112,7 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
@@ -121,23 +140,8 @@
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-bottom: 60px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
-            color: #ffffff;
-            padding: 16px 36px;
-            border-radius: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.6);
+            margin-bottom: 50px;
+            width: 100%;
         }
 
         /* App Preview Mockup */
@@ -147,8 +151,8 @@
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 24px;
             padding: 20px;
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
         }
@@ -190,9 +194,12 @@
 
         /* Features Section */
         .features {
+            width: 100%;
             max-width: 1200px;
-            margin: 120px auto;
-            padding: 0 20px;
+            margin: 80px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .section-title {
@@ -212,8 +219,9 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .feature-card {
@@ -223,8 +231,6 @@
             padding: 40px 30px;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
         }
 
         .feature-card:hover {
@@ -252,12 +258,13 @@
 
         /* Footer */
         footer {
+            width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 20px;
+            padding: 40px 0;
             text-align: center;
             color: #64748b;
             font-size: 0.9rem;
-            margin-top: 100px;
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -265,82 +272,84 @@
 
     <div class="aurora"></div>
 
-    <nav>
-        <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-            <img src="logo.jpg" alt="Lakshya Logo" style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%; background: rgba(56, 189, 248, 0.1); padding: 5px; border: 1px solid rgba(56, 189, 248, 0.3);">
-            <span>Lakshya</span>
-        </div>
-        <a href="#features" class="nav-btn">Explore Features</a>
-    </nav>
-
-    <section class="hero">
-        <div class="badge">✨ Ultimate Student & NEET Companion</div>
-        <h1>Crack NEET With Precision & <span>Unstoppable Focus</span></h1>
-        <p>Lakshya is your all-in-one productivity powerhouse designed specifically for serious medical aspirants. Track tasks, log study hours, master mock tests, and conquer your exams.</p>
-        
-        <div class="cta-group">
-            <span class="badge">🩺 Target AIIMS Delhi • Master Your NEET Journey</span>
-        </div>
-
-        <div class="app-mockup">
-            <div class="mockup-header">
-                <div class="dot dot-red"></div>
-                <div class="dot dot-yellow"></div>
-                <div class="dot dot-green"></div>
+    <div class="page-wrapper">
+        <nav>
+            <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+                <img src="logo.jpg" alt="Lakshya Logo" style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%; background: rgba(56, 189, 248, 0.1); padding: 5px; border: 1px solid rgba(56, 189, 248, 0.3);">
+                <span>Lakshya</span>
             </div>
-            <div class="mockup-screen">
-                <h3>Welcome to Lakshya App</h3>
-                <p>Streamlined Task Management • Smart Study Logs • AI-Powered Guidance</p>
-            </div>
-        </div>
-    </section>
+            <a href="#features" class="nav-btn">Explore Features</a>
+        </nav>
 
-    <section class="features" id="features">
-        <h2 class="section-title">Built for Top Rankers</h2>
-        <p class="section-subtitle">Everything you need to stay ahead in your NEET preparation journey.</p>
-
-        <div class="grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Smart Goal Tracking</h3>
-                <p>Organize daily and weekly academic targets by subject. Keep your milestones structured and never lose track of what matters.</p>
+        <section class="hero">
+            <div class="badge">✨ Ultimate Student & NEET Companion</div>
+            <h1>Crack NEET With Precision & <span>Unstoppable Focus</span></h1>
+            <p>Lakshya is your all-in-one productivity powerhouse designed specifically for serious medical aspirants. Track tasks, log study hours, master mock tests, and conquer your exams.</p>
+            
+            <div class="cta-group">
+                <span class="badge">🩺 Target AIIMS Delhi • Master Your NEET Journey</span>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">⏱️</div>
-                <h3>Precision Study Logs</h3>
-                <p>Log your study sessions chapter-by-chapter and subject-by-subject. Measure your true productivity in real-time.</p>
+            <div class="app-mockup">
+                <div class="mockup-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="mockup-screen">
+                    <h3>Welcome to Lakshya App</h3>
+                    <p>Streamlined Task Management • Smart Study Logs • AI-Powered Guidance</p>
+                </div>
             </div>
+        </section>
 
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Mock Test Analytics</h3>
-                <p>Record and analyze your mock test scores. Track your progress across tests to pinpoint weak areas and boost your AIR.</p>
+        <section class="features" id="features">
+            <h2 class="section-title">Built for Top Rankers</h2>
+            <p class="section-subtitle">Everything you need to stay ahead in your NEET preparation journey.</p>
+
+            <div class="grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Goal Tracking</h3>
+                    <p>Organize daily and weekly academic targets by subject. Keep your milestones structured and never lose track of what matters.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Precision Study Logs</h3>
+                    <p>Log your study sessions chapter-by-chapter and subject-by-subject. Measure your true productivity in real-time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Mock Test Analytics</h3>
+                    <p>Record and analyze your mock test scores. Track your progress across tests to pinpoint weak areas and boost your AIR.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Assistance</h3>
+                    <p>Powered by advanced AI integrations to answer your doubts instantly and keep your preparation streamlined.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private Cloud</h3>
+                    <p>Your data is securely stored with robust Firestore security rules, ensuring complete privacy and synchronization.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    ### Lightning Fast UI
+                    <p>Designed for zero distractions. Clean, modern Material-inspired interface built for dedicated aspirants.</p>
+                </div>
             </div>
+        </section>
 
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI-Powered Assistance</h3>
-                <p>Powered by advanced AI integrations to answer your doubts instantly and keep your preparation streamlined.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Secure & Private Cloud</h3>
-                <p>Your data is securely stored with robust Firestore security rules, ensuring complete privacy and synchronization.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast UI</h3>
-                <p>Designed for zero distractions. Clean, modern Material-inspired interface built for dedicated aspirants.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Lakshya App. Crafted with passion for NEET Aspirants.</p>
-    </footer>
+        <footer>
+            <p>© 2026 Lakshya App. Crafted with passion for NEET Aspirants.</p>
+        </footer>
+    </div>
 
 </body>
 </html>
