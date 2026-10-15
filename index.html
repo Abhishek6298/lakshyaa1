@@ -1,335 +1,513 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lakshya - Ultimate NEET & Student Productivity App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Lakshya AI (v1.1) — Ultimate NEET UG & JEE Study Command Center</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#07090E',
+                        surface: '#0B0F19',
+                        cardBg: 'rgba(15, 23, 42, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            background: #060913;
-            color: #f1f5f9;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #07090E;
+            color: #F1F5F9;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-
-        /* Background Aurora Effect */
-        .aurora {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            max-width: 1200px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(147, 51, 234, 0.12));
-            filter: blur(140px);
-            z-index: -1;
-            border-radius: 50%;
-            pointer-events: none;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-
-        /* Wrapper to keep everything centered and full width */
-        .page-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 20px;
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
         }
-
-        /* Navbar */
-        nav {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 0;
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
         }
-
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            padding: 10px 22px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            text-decoration: none;
+        .glow-emerald {
+            box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
         }
-
-        .nav-btn:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.4);
+        .glow-indigo {
+            box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.4);
         }
-
-        /* Hero Section */
-        .hero {
-            width: 100%;
-            max-width: 900px;
-            margin: 40px auto 80px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
         }
-
-        .badge {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: #94a3b8;
-            max-width: 650px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-            width: 100%;
-        }
-
-        /* Glowing Animated Border App Mockup */
-        @keyframes borderGlow {
-            0% {
-                box-shadow: 0 0 25px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.2);
-                border-color: rgba(56, 189, 248, 0.8);
-            }
-            50% {
-                box-shadow: 0 0 50px rgba(168, 85, 247, 0.8), inset 0 0 30px rgba(168, 85, 247, 0.4);
-                border-color: rgba(168, 85, 247, 1);
-            }
-            100% {
-                box-shadow: 0 0 25px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.2);
-                border-color: rgba(56, 189, 248, 0.8);
-            }
-        }
-
-        .app-mockup {
-            background: #0b0f19;
-            border: 2px solid rgba(56, 189, 248, 0.8);
-            border-radius: 28px;
-            padding: 15px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
-            animation: borderGlow 3s infinite ease-in-out;
-            margin: 0 auto;
-        }
-
-        .app-screenshot {
-            width: 100%;
-            border-radius: 18px;
-            display: block;
-            object-fit: contain;
-        }
-
-        /* Features Section */
-        .features {
-            width: 100%;
-            max-width: 1200px;
-            margin: 80px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 1.05rem;
-            margin-bottom: 60px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 24px;
-            padding: 40px 30px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .feature-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 0;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-top: 80px;
+        .pulse-glow {
+            animation: pulseGlow 3s infinite ease-in-out;
         }
     </style>
 </head>
-<body>
+<body class="bg-obsidian text-slate-100 selection:bg-indigo-500 selection:text-white">
 
-    <div class="aurora"></div>
+    <!-- Ambient Background Radial Gradients -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-tr from-indigo-600/15 via-emerald-500/10 to-amber-500/10 blur-[140px] pointer-events-none z-0"></div>
 
-    <div class="page-wrapper">
-        <nav>
-            <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-                <img src="logo.jpg" alt="Lakshya Logo" style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%; background: rgba(56, 189, 248, 0.1); padding: 5px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                <span>Lakshya</span>
+    <!-- Sticky Glass Navbar -->
+    <nav class="sticky top-0 z-50 w-full glass-card border-b border-slate-800/80 bg-obsidian/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-400 p-[2px] flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                        <i data-lucide="target" class="w-5 h-5 text-emerald-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent">Lakshya AI</span>
+                    <span class="ml-2 px-2 py-0.5 text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">v1.1</span>
+                </div>
             </div>
-            <a href="#features" class="nav-btn">Explore Features</a>
-        </nav>
 
-        <section class="hero">
-            <div class="badge">✨ Ultimate Student & NEET Companion</div>
-            <h1>Crack NEET With Precision & <span>Unstoppable Focus</span></h1>
-            <p>Lakshya is your all-in-one productivity powerhouse designed specifically for serious medical aspirants. Track tasks, log study hours, master mock tests, and conquer your exams.</p>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#features" class="hover:text-white transition">Bento Grid</a>
+                <a href="#interactive-preview" class="hover:text-white transition">AI Preview</a>
+                <a href="#widgets" class="hover:text-white transition">Widgets</a>
+                <a href="#cutoffs" class="hover:text-white transition">GMC Cutoffs</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/Abhishek6298/1se-latest-laskya-stable" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 transition">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub Repo
+                </a>
+                <a href="#download" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 glow-emerald transition transform hover:-translate-y-0.5">
+                    <i data-lucide="download" class="w-4 h-4"></i> Download APK v1.1
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-16 pb-24 md:pt-24 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <!-- Top Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-indigo-500/30 text-indigo-300 text-xs sm:text-sm font-semibold mb-8 pulse-glow">
+            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+            <span>Built for NEET UG & JEE 2026–27 Rankers | Powered by Gemini 3.8 Flash & Multi-AI</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.1] mb-6">
+            Stop Studying Blindly. Turn Every PDF, Mistake & PYQ into a <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">700+ NEET Score.</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+            India's most advanced AI Study Command Center — featuring a 39-Year PYQ CBT Generator, Coaching PDF-to-CBT OCR Scanner, 4-Stage Spaced Repetition Mistake Notebook, and Kota HOD-style AI Doubt Solver.
+        </p>
+
+        <!-- CTA Group -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <a href="#download" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-base glow-emerald transition transform hover:-translate-y-1">
+                <i data-lucide="download-cloud" class="w-5 h-5"></i> Download Lakshya APK (v1.1) — Free
+            </a>
+            <a href="#interactive-preview" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl glass-card hover:bg-slate-800/80 text-slate-200 font-bold text-base border border-slate-700 transition">
+                <span>Try Interactive Preview</span> <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <!-- Hero Visual / 3D Mockup Container -->
+        <div class="relative max-w-4xl mx-auto">
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-indigo-500 via-emerald-500 to-amber-500 rounded-3xl blur-xl opacity-30"></div>
+            <div class="relative glass-card rounded-3xl p-6 sm:p-10 border border-slate-700/80 bg-surface/90 shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <!-- Live NEET Countdown Card -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-700/50">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">NEET UG 2026</span>
+                            <i data-lucide="timer" class="w-4 h-4 text-emerald-400"></i>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-white mb-1" id="countdown-timer">218d 14h 32m</div>
+                        <p class="text-xs text-slate-400">Targeting AIIMS Delhi • AIR 1 Command</p>
+                    </div>
+
+                    <!-- AI Daily Streak Card -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-700/50">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Daily Study Log</span>
+                            <i data-lucide="flame" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-white mb-1">8h 45m / 10h</div>
+                        <p class="text-xs text-slate-400">Physics: 3h • Bio: 4h • Chem: 1h 45m</p>
+                    </div>
+
+                    <!-- 10-Second Shortcut Card -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-700/50">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Kota HOD Trick</span>
+                            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-200 mb-1">Rotational Inertia Shortcut</p>
+                        <p class="text-[11px] text-slate-400">"Parallel axis theorem mein $I_{cm}$ ke sath hamesha $Md^2$ add karo—kabhi negative nahi hoga!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Section -->
+    <section id="features" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+                Engineered for <span class="bg-gradient-to-r from-emerald-400 to-indigo-400 bg-clip-text text-transparent">Top 1% Ranks</span>
+            </h2>
+            <p class="text-slate-400 text-base sm:text-lg">
+                Six powerful pillars built into Lakshya v1.1 to replace your coaching clutter with precision AI engineering.
+            </p>
+        </div>
+
+        <!-- 6-Card Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Bento Card 1 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-bl-full pointer-events-none group-hover:bg-indigo-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mb-6 text-indigo-400">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">39-Year PYQ AI CBT Mock Engine (1988–2026)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Generate full-length 180Q NTA-pattern NEET mocks (45 Physics + 45 Chemistry + 90 Biology) or chapter-wise tests. Features special 50/50 Physics & Chemistry mix (NEET/AIPMT + JEE Main & HC Verma benchmarks) with authentic NCERT diagrams.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-indigo-400">
+                    <span>1888–2026 Verified Database</span>
+                </div>
+            </div>
+
+            <!-- Bento Card 2 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full pointer-events-none group-hover:bg-emerald-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-6 text-emerald-400">
+                        <i data-lucide="scan-text" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Smart OCR PDF-to-CBT Scanner</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Upload any coaching test paper PDF or photo (Allen, Aakash, PW, Motion) and instantly convert it into a live, timed CBT mock test with auto-cropped diagrams and instant AI solutions.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-emerald-400">
+                    <span>Instant PDF Parsing & Parsing</span>
+                </div>
+            </div>
+
+            <!-- Bento Card 3 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-bl-full pointer-events-none group-hover:bg-amber-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mb-6 text-amber-400">
+                        <i data-lucide="book-open-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">4-Stage Spaced Repetition Mistake Notebook</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Never repeat a silly mistake or conceptual trap. Snap photos of Questions & Answers and review them automatically on Day 1 (24h), Day 3 (72h), Day 7 (Week), and Day 14+ until Mastered.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-amber-400">
+                    <span>Zero Repeat Silly Mistakes</span>
+                </div>
+            </div>
+
+            <!-- Bento Card 4 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-bl-full pointer-events-none group-hover:bg-teal-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center mb-6 text-teal-400">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Kota HOD AI Doubt Solver & Detox Coach</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Step-by-step physics/organic derivations, negative-marking trap warnings, 10-second option elimination tricks, plus a strict 'Elder Brother' Hinglish Habit & Dopamine Detox motivator.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-teal-400">
+                    <span>Kota Faculty Mentorship 24/7</span>
+                </div>
+            </div>
+
+            <!-- Bento Card 5 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group" id="widgets">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-bl-full pointer-events-none group-hover:bg-purple-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-6 text-purple-400">
+                        <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">5 Interactive Android Home Screen Widgets</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Study without even opening the app—NEET/JEE Countdown Command Center, Interactive DPP & Timetable Checklist, OnePlus-style Instant Sticky Notes, Mistake Quick-Revision, and Mock Scheduler.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-purple-400">
+                    <span>Zero Friction Home Access</span>
+                </div>
+            </div>
+
+            <!-- Bento Card 6 -->
+            <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between relative group" id="cutoffs">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-bl-full pointer-events-none group-hover:bg-rose-500/20 transition"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center mb-6 text-rose-400">
+                        <i data-lucide="building-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">All-India GMC Cutoffs & Medical College Predictor</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Explore NIRF ranks, AIQ & State Quota cutoffs (Marks & Ranks for Gen/OBC/EWS/SC/ST), annual fees, bond rules, hospital beds, and intern stipends for AIIMS New Delhi, MAMC, VMMC, AIIMS Patna, PMCH, and IGIMS.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center text-xs font-mono text-rose-400">
+                    <span>AIIMS & GMC NIRF Verified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Feature Switcher Section -->
+    <section id="interactive-preview" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                Experience Lakshya AI in Action
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base">
+                Click tabs below to test simulated live app diagnostic cards.
+            </p>
+        </div>
+
+        <!-- Tab Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button onclick="switchTab(1)" id="tab-btn-1" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition">1. AI Error Diagnosis</button>
+            <button onclick="switchTab(2)" id="tab-btn-2" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">2. PYQ Mock Generator</button>
+            <button onclick="switchTab(3)" id="tab-btn-3" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">3. Kota Doubt Solver</button>
+            <button onclick="switchTab(4)" id="tab-btn-4" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">4. GMC Cutoffs</button>
+        </div>
+
+        <!-- Tab Content Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-700/80 bg-surface shadow-2xl">
+            <!-- Tab 1 -->
+            <div id="tab-content-1" class="tab-content">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-mono text-indigo-400 uppercase tracking-wider">Physics • Rotational Motion</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Mistake Diagnosis & Examiner Trap Warning</h3>
+                    </div>
+                    <span class="px-3 py-1 bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-mono rounded-full">Silly Mistake Flagged</span>
+                </div>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                        <strong class="text-white block mb-1">🔍 Mistake Root Cause:</strong>
+                        "You applied Parallel Axis Theorem incorrectly by taking the axis at distance $d$ from an arbitrary parallel line instead of the *center of mass axis* ($I = I_{cm} + Md^2$)."
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/20">
+                            <strong class="text-emerald-400 block mb-1">💡 NCERT Principle:</strong>
+                            Moment of inertia about any axis parallel to a body through its center of mass is the sum of moment of inertia about center of mass and $Md^2$.
+                        </div>
+                        <div class="p-4 rounded-2xl bg-amber-950/30 border border-amber-500/20">
+                            <strong class="text-amber-400 block mb-1">⚡ 10-Second Shortcut:</strong>
+                            Never memorize formulas for shifting non-CM axes. Always compute $I_{cm}$ first, then add $Md^2$.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2 -->
+            <div id="tab-content-2" class="tab-content hidden">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">NTA Pattern CBT Simulator</span>
+                        <h3 class="text-xl font-bold text-white mt-1">39-Year PYQ Full Mock (1988–2026)</h3>
+                    </div>
+                    <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono rounded-full">180 Questions • 3 Hours</span>
+                </div>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+                            <div class="text-2xl font-bold text-white font-mono mb-1">45 Qs</div>
+                            <div class="text-xs text-slate-400">Physics (50/50 AIPMT + JEE Mix)</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+                            <div class="text-2xl font-bold text-white font-mono mb-1">45 Qs</div>
+                            <div class="text-xs text-slate-400">Chemistry (Inorganic NCERT Line-by-Line)</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+                            <div class="text-2xl font-bold text-white font-mono mb-1">90 Qs</div>
+                            <div class="text-xs text-slate-400">Biology (Botany + Zoology SVG Diagrams)</div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-indigo-950/30 border border-indigo-500/20 text-center">
+                        <p class="text-xs text-indigo-300">⚡ Instant NTA-grade rank prediction & percentile breakdown generated immediately after submission.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3 -->
+            <div id="tab-content-3" class="tab-content hidden">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-mono text-teal-400 uppercase tracking-wider">Kota HOD Doubt Engine</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Organic Chemistry Name Reactions & Mechanism</h3>
+                    </div>
+                    <span class="px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs font-mono rounded-full">Gemini 3.8 Flash AI</span>
+                </div>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 font-mono text-xs text-indigo-300">
+                        Q: "Why does Reimer-Tiemann reaction yield salicylaldehyde with electrophile $CCl_2$ instead of $CHCl_3$ directly?"
+                    </div>
+                    <div class="p-4 rounded-2xl bg-teal-950/30 border border-teal-500/20">
+                        <strong class="text-teal-400 block mb-1">👨‍🏫 Kota Faculty Breakdown:</strong>
+                        "Bhai, $CHCl_3$ (Chloroform) base ($OH^-$) ke sath reaction karke pehle dichlorocarbene ($:CCl_2$) banata hai jo ki ek electron-deficient electrophile hai. Yeh phenoxide ion ki ortho position par attack karta hai..."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4 -->
+            <div id="tab-content-4" class="tab-content hidden">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-mono text-rose-400 uppercase tracking-wider">AIIMS & GMC Predictor</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Top Medical Colleges Cutoffs (General / OBC / EWS / SC / ST)</h3>
+                    </div>
+                    <span class="px-3 py-1 bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-mono rounded-full">AIQ 15% & State 85%</span>
+                </div>
+                <div class="space-y-3 text-sm text-slate-300">
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                        <div>
+                            <strong class="text-white block">AIIMS New Delhi</strong>
+                            <span class="text-xs text-slate-400">General AIR 1 - 57</span>
+                        </div>
+                        <span class="font-mono text-emerald-400 font-bold">715+ Marks</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                        <div>
+                            <strong class="text-white block">Maulana Azad Medical College (MAMC), Delhi</strong>
+                            <span class="text-xs text-slate-400">General AIR 58 - 320</span>
+                        </div>
+                        <span class="font-mono text-emerald-400 font-bold">700+ Marks</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                        <div>
+                            <strong class="text-white block">Patna Medical College (PMCH), Bihar</strong>
+                            <span class="text-xs text-slate-400">State Quota & AIQ verified</span>
+                        </div>
+                        <span class="font-mono text-emerald-400 font-bold">660+ Marks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download CTA Section -->
+    <section id="download" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+        <div class="glass-card rounded-3xl p-10 sm:p-16 border border-emerald-500/30 bg-gradient-to-br from-surface via-obsidian to-emerald-950/20 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
             
-            <div class="cta-group">
-                <span class="badge">🩺 Target AIIMS Delhi • Master Your NEET Journey</span>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono font-bold mb-6">
+                <span>VERSION 1.1 STABLE RELEASE</span>
             </div>
 
-            <!-- Glowing Animated App Screenshot Preview -->
-            <div class="app-mockup">
-                <img src="app_screenshot.jpg" alt="Lakshya App UI" class="app-screenshot">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+                Get Lakshya APK Now & Start Your <span class="text-emerald-400">AIIR 1 Journey</span>
+            </h2>
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10">
+                100% Free for all Indian NEET UG and JEE aspirants. Instant installation on Android devices.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://github.com/Abhishek6298/1se-latest-laskya-stable" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-lg glow-emerald transition transform hover:-translate-y-1">
+                    <i data-lucide="download" class="w-6 h-6"></i> Download Lakshya APK (v1.1)
+                </a>
+                <a href="https://github.com/Abhishek6298/1se-latest-laskya-stable" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-5 rounded-2xl glass-card hover:bg-slate-800/80 text-slate-200 font-bold text-base border border-slate-700 transition">
+                    <i data-lucide="github" class="w-5 h-5"></i> View Source Repository
+                </a>
             </div>
-        </section>
 
-        <section class="features" id="features">
-            <h2 class="section-title">Built for Top Rankers</h2>
-            <p class="section-subtitle">Everything you need to stay ahead in your NEET preparation journey.</p>
-
-            <div class="grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Smart Goal Tracking</h3>
-                    <p>Organize daily and weekly academic targets by subject. Keep your milestones structured and never lose track of what matters.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⏱️</div>
-                    <h3>Precision Study Logs</h3>
-                    <p>Log your study sessions chapter-by-chapter and subject-by-subject. Measure your true productivity in real-time.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Mock Test Analytics</h3>
-                    <p>Record and analyze your mock test scores. Track your progress across tests to pinpoint weak areas and boost your AIR.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI-Powered Assistance</h3>
-                    <p>Powered by advanced AI integrations to answer your doubts instantly and keep your preparation streamlined.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure & Private Cloud</h3>
-                    <p>Your data is securely stored with robust Firestore security rules, ensuring complete privacy and synchronization.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast UI</h3>
-                    <p>Designed for zero distractions. Clean, modern Material-inspired interface built for dedicated aspirants.</p>
-                </div>
+            <div class="mt-8 flex items-center justify-center gap-6 text-xs text-slate-500 font-mono">
+                <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Verified Safe APK</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Instant Install</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="heart" class="w-4 h-4 text-rose-400"></i> Built for Aspirants</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>© 2026 Lakshya App. Crafted with passion for NEET Aspirants.</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-800 bg-surface/50 py-12 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 font-bold text-slate-300">
+                <i data-lucide="target" class="w-4 h-4 text-emerald-400"></i> Lakshya AI v1.1
+            </div>
+            <p>© 2026 Lakshya AI. Empowering NEET & JEE Aspirants across India.</p>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/Abhishek6298/1se-latest-laskya-stable" target="_blank" class="hover:text-slate-300 transition">GitHub</a>
+            </div>
+        </div>
+    </footer>
 
+    <!-- JavaScript for Lucide & Interactive Tabs & Countdown -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Interactive Feature Switcher Tabs
+        function switchTab(tabNumber) {
+            // Hide all tabs
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('tab-content-' + i).classList.add('hidden');
+                const btn = document.getElementById('tab-btn--' + i);
+                const btnDirect = document.getElementById('tab-btn-' + i);
+                if (btnDirect) {
+                    btnDirect.className = "px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700 transition";
+                }
+            }
+            // Show selected tab
+            document.getElementById('tab-content-' + tabNumber).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-btn-' + tabNumber);
+            activeBtn.className = "px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition";
+        }
+
+        // Live NEET Countdown Timer Simulator
+        function updateCountdown() {
+            const targetDate = new Date('May 3, 2026 14:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('countdown-timer').innerText = `${days}d ${hours}h ${minutes}m`;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
